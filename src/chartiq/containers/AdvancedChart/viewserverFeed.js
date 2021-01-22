@@ -6,7 +6,7 @@ import {
   Logger,
   LogLevel,
 } from "@reddeer/viewserver-core-jsclient";
-import { filter, take } from "rxjs/operators";
+import { filter, takeWhile, take, debounceTime } from "rxjs/operators";
 import * as moment from "moment";
 
 Logger.level = LogLevel.TRACE;
@@ -18,7 +18,7 @@ export const connection = new ServerConnection(
 );
 const client = new SubscriptionClient(connection);
 const dataSink = new RxDataSink("main");
-
+const RowEvents = [DataSinkEventType.ROW_ADDED, DataSinkEventType.ROW_UPDATED, DataSinkEventType.ROW_REMOVED];
 let ticker;
 
 let subscription;
@@ -36,6 +36,7 @@ const transform = (feedData = []) => {
     newQuote.Volume = volume;
     newQuotes.push(newQuote);
   }
+  newQuotes.sort((a, b) => b.DT.getTime() - a.DT.getTime());
   return newQuotes;
 };
 
@@ -43,26 +44,24 @@ const subscribeToTickerData = (ticker, cb) => {
   dataSink.dataSinkUpdated
     .pipe(filter((ev) => ev.Type === DataSinkEventType.ERROR))
     .subscribe((ev) => cb({ error: ev.error.ErrorMessage }));
-  //dataSink.dataSinkUpdated.pipe(filter(ev => ev.Type === DataSinkEventType.ERROR)).subscribe(ev => setErrorInCommandState(commandKey, ev.error.ErrorMessage, connectionName, ev.error.ErrorName));
-
   dataSink.dataSinkUpdated
     .pipe(filter((ev) => ev.Type === DataSinkEventType.SNAPSHOT_COMPLETE))
     .pipe(take(1))
     .subscribe((ev) => {
-      /*dataSubscription();
-			setSnapshotComplete(commandKey, true, connectionName);*/
-      cb({
+      const doCallBack = () => cb({
         quotes: transform(dataSink.snapshot),
-        moreAvailable: true,
+        moreAvailable: false,
         attribution: { source: "simulator", exchange: "RANDOM" },
       });
+      doCallBack()
+      dataSink.dataSinkUpdated.pipe(filter(ev => !!~RowEvents.indexOf(ev.Type))).pipe(debounceTime(50)).subscribe(ev => doCallBack());
     });
   subscription = client.subscribeAny(
     "SubscribeToReport",
     {
       ReportKey: "IntradayPriceHistory",
       ParameterValues: {
-        BBGTicker: "VOD LN Equity",
+        BBGTicker: ticker,
         DateFrame: "3",
       },
     },
@@ -96,17 +95,17 @@ quoteFeedSimulator.fetchInitialData = function (
 };
 // called by chart to fetch update data
 quoteFeedSimulator.fetchUpdateData = function (symbol, startDate, params, cb) {
-  if (true) {
-    cb({
-      quotes: transform(dataSink.snapshot),
-      attribution: { source: "simulator", exchange: "RANDOM" },
-    });
-  } else {
-    subscription.unsubscribe(true).then((payload) => {
-      console.log(JSON.stringify(payload, null, 2));
-      subscribeToTickerData(ticker, cb);
-    });
-  }
+  // if (true) {
+  //   cb({
+  //     quotes: transform(dataSink.snapshot),
+  //     attribution: { source: "simulator", exchange: "RANDOM" },
+  //   });
+  // } else {
+  //   subscription.unsubscribe(true).then((payload) => {
+  //     console.log(JSON.stringify(payload, null, 2));
+  //     subscribeToTickerData(ticker, cb);
+  //   });
+  // }
 };
 // called by chart to fetch pagination data
 quoteFeedSimulator.fetchPaginationData = function (
@@ -116,6 +115,7 @@ quoteFeedSimulator.fetchPaginationData = function (
   params,
   cb
 ) {
+  console.log("fetching pagination data");
   /*subscription.unsubscribe(true).then((payload) => {
     console.log(JSON.stringify(payload, null, 2));
     subscribeToTickerData(ticker, cb);
