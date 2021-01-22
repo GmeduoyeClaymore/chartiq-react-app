@@ -23,7 +23,8 @@ import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
 
-import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
+import quoteFeed from "./viewserverFeed";
+//import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 // Uncomment the following for the forecasting simulator (required for the forecasting sample).
 // import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
