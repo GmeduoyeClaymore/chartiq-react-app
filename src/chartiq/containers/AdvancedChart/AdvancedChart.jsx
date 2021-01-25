@@ -29,9 +29,9 @@ export default class AdvancedChart extends React.Component {
     this.container = React.createRef();
     this.chartId = props.chartId || "_advanced-chart";
     this.initialSymbol = props.symbol || {
-      symbol: "APPL",
-      name: "Apple Inc",
-      exchDisp: "NASDAQ",
+      symbol: "VOD LN Equity",
+      name: "Vodaphone",
+      exchDisp: "XLON",
     };
 
     this.state = {
