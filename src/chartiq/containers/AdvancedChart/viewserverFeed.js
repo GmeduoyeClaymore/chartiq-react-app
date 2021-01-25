@@ -50,7 +50,7 @@ const subscribeToTickerData = (ticker, cb) => {
     .subscribe((ev) => {
       const doCallBack = () => cb({
         quotes: transform(dataSink.snapshot),
-        moreAvailable: false,
+        moreAvailable: true,
         attribution: { source: "simulator", exchange: "RANDOM" },
       });
       doCallBack()
@@ -71,7 +71,7 @@ const subscribeToTickerData = (ticker, cb) => {
       {
         Name: "Authorization",
         Value:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vZmlyZWZseS91c2VyaWQiOiIzOTIiLCJodHRwOi8vZmlyZWZseS9yZWFsdXNlcmlkIjoiMzkyIiwiaHR0cDovL2ZpcmVmbHkvaXBhZGRyZXNzIjoiOjpmZmZmOjE5Mi4xNjguNS4xODMiLCJodHRwOi8vZmlyZWZseS9tYWNoaW5laWQiOiJmYzFiOGQ3YS04YWYzLTRlZTctYTM4Yi1jZWNjZTdmY2UyNDMiLCJodHRwOi8vZmlyZWZseS9yb2xlIjoiRGV2ZWxvcGVyIiwiaHR0cDovL2ZpcmVmbHkvYmxvb21iZXJndXVpZCI6IjMwNjAyMjEzIiwidW5pcXVlX25hbWUiOiJNQkFNXFxKb24uVGFuc2V5IiwicHJpbWFyeXNpZCI6IlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTEyMjA2IiwicHJpbWFyeWdyb3Vwc2lkIjoiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtNTEzIiwiZ3JvdXBzaWQiOlsiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtNTEzIiwiUy0xLTEtMCIsIlMtMS01LTMyLTU0NSIsIlMtMS01LTIiLCJTLTEtNS0xMSIsIlMtMS01LTE1IiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtMjA2NSIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTk0MzQiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC0xODU2IiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtMjI4MyIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTkxMDMiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC04NzIzIiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtMTgxOSIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTg5MjYiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC04OTQxIiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtMTY5MyIsIlMtMS0xOC0xIl0sIm5iZiI6MTYxMTMwNDMyOSwiZXhwIjoxNjExMzYxOTI5LCJpYXQiOjE2MTEzMDQzMjksImlzcyI6Imh0dHA6Ly9yYWlkdWF0YXBwIiwiYXVkIjoiaHR0cDovL3JhaWR1YXRhcHAifQ.LijePQgwzsz3907rsBEuj_MSKngmUW0f0HAjRniw5Ew",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vZmlyZWZseS91c2VyaWQiOiIzNTIiLCJodHRwOi8vZmlyZWZseS9yZWFsdXNlcmlkIjoiMzUyIiwiaHR0cDovL2ZpcmVmbHkvaXBhZGRyZXNzIjoiOjpmZmZmOjE5Mi4xNjguNS45OSIsImh0dHA6Ly9maXJlZmx5L3JvbGUiOiJEZXZlbG9wZXIiLCJodHRwOi8vZmlyZWZseS9ibG9vbWJlcmd1dWlkIjoiMzA2MDIxNzciLCJ1bmlxdWVfbmFtZSI6Ik1CQU1cXGJlbS5tZWR1b3llIiwicHJpbWFyeXNpZCI6IlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTg4NTYiLCJwcmltYXJ5Z3JvdXBzaWQiOiJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC01MTMiLCJncm91cHNpZCI6WyJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC01MTMiLCJTLTEtMS0wIiwiUy0xLTUtMzItNTQ1IiwiUy0xLTUtMiIsIlMtMS01LTExIiwiUy0xLTUtMTUiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC05NDM0IiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtMTg1NiIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTk0MzUiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC05MTAzIiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtODcyMyIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTE4MTkiLCJTLTEtNS0yMS0yMjc4MzgzNDAwLTI0NzYxNDk4ODEtMjUyMTQ1OTMyMC04OTI2IiwiUy0xLTUtMjEtMjI3ODM4MzQwMC0yNDc2MTQ5ODgxLTI1MjE0NTkzMjAtODk0MSIsIlMtMS01LTIxLTIyNzgzODM0MDAtMjQ3NjE0OTg4MS0yNTIxNDU5MzIwLTE2OTMiLCJTLTEtNS02NC0xMCJdLCJuYmYiOjE2MTE1NjQ3NTksImV4cCI6MTYxMTYyMjM1OSwiaWF0IjoxNjExNTY0NzU5LCJpc3MiOiJodHRwOi8vcmFpZHVhdGFwcCIsImF1ZCI6Imh0dHA6Ly9yYWlkdWF0YXBwIn0.-TxKMJPMRc0LhXF_TgEMYv_mn1fh2oGtKhS0qfQtUwE",
       },
     ]
   );
@@ -95,17 +95,17 @@ quoteFeedSimulator.fetchInitialData = function (
 };
 // called by chart to fetch update data
 quoteFeedSimulator.fetchUpdateData = function (symbol, startDate, params, cb) {
-  // if (true) {
-  //   cb({
-  //     quotes: transform(dataSink.snapshot),
-  //     attribution: { source: "simulator", exchange: "RANDOM" },
-  //   });
-  // } else {
-  //   subscription.unsubscribe(true).then((payload) => {
-  //     console.log(JSON.stringify(payload, null, 2));
-  //     subscribeToTickerData(ticker, cb);
-  //   });
-  // }
+  if (true) {
+    cb({
+      quotes: transform(dataSink.snapshot),
+      attribution: { source: "simulator", exchange: "RANDOM" },
+    });
+  } else {
+    subscription.unsubscribe(true).then((payload) => {
+      console.log(JSON.stringify(payload, null, 2));
+      subscribeToTickerData(ticker, cb);
+    });
+  }
 };
 // called by chart to fetch pagination data
 quoteFeedSimulator.fetchPaginationData = function (
