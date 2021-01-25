@@ -85,12 +85,7 @@ const subscribeToTickerData = (ticker, cb) => {
   );
 };
 
-var quoteFeedSimulator = {}; // the quotefeed object
-// local, non-dependent implementation of XmlHttpRequest
-
-//quoteFeedSimulator.maxTicks = 20000;
-//quoteFeedSimulator.url = "https://simulator.chartiq.com/datafeed";
-// called by chart to fetch initial data
+var quoteFeedSimulator = {};
 quoteFeedSimulator.fetchInitialData = function (
   symbol,
   suggestedStartDate,
