@@ -10,5 +10,5 @@ import { SubscriptionChart } from "./chartiq";
 const el = document.querySelector("#app");
 
 if (el) {
-  ReactDom.render(<SubscriptionChart />, el);
+  ReactDom.render(<AdvancedChart />, el);
 }
