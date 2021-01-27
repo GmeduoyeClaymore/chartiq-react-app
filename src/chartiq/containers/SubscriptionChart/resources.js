@@ -23,7 +23,7 @@ import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
 
-import quoteFeed from "./viewserverFeed";
+//import quoteFeed from "./viewserverFeed";
 //import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
@@ -33,7 +33,7 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 
 
 const config = getConfig({ 
-	quoteFeed,
+	//quoteFeed,
 	markerSample: marker.MarkersSample,
 	scrollStyle: PerfectScrollbar,
 });
@@ -42,19 +42,12 @@ config.marketFactory = undefined;
 config.market = CIQ.Market.LSE;
 
 const { 
-	marketDepth,
-	termStructure,
-	tfc,
+
 	timeSpanEventPanel,
-	visualEarnings
 } = config.plugins;
 // Select only plugin configurations that needs to be active for this chart
 config.plugins = { 
-	// marketDepth,
-	// termStructure,
-	// tfc,
 	timeSpanEventPanel,
-	// visualEarnings
 };
 
 export { CIQ, config };

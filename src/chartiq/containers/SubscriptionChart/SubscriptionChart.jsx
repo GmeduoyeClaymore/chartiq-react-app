@@ -3,13 +3,14 @@ import { CIQ } from "chartiq/js/componentUI";
 
 import ChartTemplate from "./Template";
 
-import { connection } from "./viewserverFeed";
+import { connection } from "./SubscriptionViewserverFeed";
 
-export default class AdvancedChart extends React.Component {
+export default class SubscriptionChart extends React.Component {
   constructor(props) {
     super(props);
     this.container = React.createRef();
     this.chartId = props.chartId || "_advanced-chart";
+
     this.initialSymbol = props.symbol || {
       symbol: "VOD LN Equity",
       name: "Vodaphone",
@@ -61,32 +62,12 @@ export default class AdvancedChart extends React.Component {
   }
 
   componentWillUnmount() {
-    // Destroy the ChartEngine instance when unloading the component.
-    // This will stop internal processes such as quotefeed polling.
     this.state.stx.destroy();
   }
 
   createChartAndUI({ container, config }) {
     const uiContext = this.state.chart.createChartAndUI({ container, config });
     const stx = uiContext.stx;
-    //stx.setMarket(CIQ.Market.LSE);
-
-    // Methods for capturing state changes in chart engine and UI
-
-    // Channel subscribe
-    // const { channels } = config;
-    // const channelSubscribe = CIQ.UI.BaseComponent.prototype.channelSubscribe;
-    // channelSubscribe(channels.breakpoint, (value) => {
-    // 	console.log('channels.breakpoint',value);
-    // }, stx);
-
-    // Create layout listener, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
-    // stx.addEventListener('layout', ({ layout }) => {
-    // 	console.log('layout changed', layout);
-    // });
-
-    // Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
-    // CIQ.simulateL2({ stx, onInterval: 1000, onTrade: true });
 
     return uiContext;
   }

@@ -962,9 +962,9 @@
     rimraf "^2.7.1"
 
 "@reddeer/viewserver-core-jsclient@^1.2.1013":
-  version "1.2.1013"
-  resolved "https://www.myget.org/F/fireflybackbone/npm/@reddeer/viewserver-core-jsclient/-/@reddeer/viewserver-core-jsclient-1.2.1013.tgz#6eaaa097496c3c6ce576c67ab9cca5247c6fd1f0"
-  integrity sha1-bqqgl0lsPGzldsZ6ucylJHxv0fA=
+  version "1.2.1050"
+  resolved "https://www.myget.org/F/fireflybackbone/npm/@reddeer/viewserver-core-jsclient/-/@reddeer/viewserver-core-jsclient-1.2.1050.tgz#a6993f6bcce78698721448f23d37f8deb5c60987"
+  integrity sha1-ppk/a8znhphyFEjyPTf43rXGCYc=
   dependencies:
     "@aspnet/signalr" "^1.1.0"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
